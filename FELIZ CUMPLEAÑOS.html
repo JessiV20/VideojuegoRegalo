@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Un encuentro entre corazones ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap');
+:root{--pink:#ed5d9b;--berry:#a93f76;--ink:#714663;--cream:#fff9fc}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px 12px;background:radial-gradient(circle at 14% 12%,#7f58e622 0 12%,transparent 35%),radial-gradient(circle at 84% 86%,#fbc5df22 0 7%,transparent 36%),linear-gradient(145deg,#2b1e46,#5d3b85 40%,#ca76d7 72%,#e8a1c0);font-family:Nunito,'Segoe UI',sans-serif;color:var(--ink)}
+.shell{width:min(100%,900px);padding:22px;background:#fffaf0f0;border:2px solid #f8d7ee;border-radius:31px;box-shadow:0 22px 65px #170d282f,0 7px 0 #d69ac8;position:relative}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:15px}.eyebrow{font-size:.72rem;letter-spacing:.17em;text-transform:uppercase;color:#c472a0;font-weight:900}.top h1{font-size:clamp(1.35rem,3.7vw,2rem);margin:0;font-weight:900;color:#a63f75;line-height:1.18}.subtitle{font-size:.83rem;color:#b17b99;margin:5px 0 0}.pill{background:#fff;border:1px solid #f5cce0;border-radius:30px;padding:10px 16px;box-shadow:0 4px 12px #dd8db220;color:#ab4c7d;font-weight:900;white-space:nowrap}.meter{width:100%;height:9px;border-radius:40px;background:#f7dce9;overflow:hidden;margin:10px 0 13px}.meter>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#f6a4ce,#ef559b);border-radius:40px;transition:width .25s}
+.stage{position:relative;overflow:hidden;border:5px solid #f7d5eb;border-radius:25px;background:#8e65dc;box-shadow:0 0 0 1px #7d5bbf,0 13px 28px #160d252e}.stage canvas{display:block;width:100%;height:auto;aspect-ratio:2/1;touch-action:none}.hint{position:absolute;left:16px;top:13px;background:#ffffffd9;color:#ac5b85;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:900;pointer-events:none}.modal{position:absolute;inset:0;background:#9d4c8075;display:none;place-items:center;padding:20px;backdrop-filter:blur(4px)}.modal.show{display:grid}.modal-inner{text-align:center;padding:22px 28px;border:3px solid #fff;background:#fff3fa;box-shadow:0 17px 40px #8b3e703c;border-radius:25px;max-width:360px;animation:pop .35s ease-out}.modal-inner .big{font-size:46px;line-height:1}.modal-inner h2{font-size:27px;color:#ad3d7a;margin:5px 0}.modal-inner p{font-size:14px;line-height:1.5;margin:0 0 16px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:17px}.instructions{font-size:13px;font-weight:800;color:#97617e}.btn{font-family:inherit;font-weight:900;font-size:14px;border:0;color:white;background:linear-gradient(135deg,#f37aae,#db4e92);padding:11px 20px;border-radius:17px;cursor:pointer;box-shadow:0 5px 0 #ad4b7d,0 8px 17px #ba588d30;transition:transform .12s,box-shadow .12s}.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #ad4b7d}.mobile{display:none;align-items:center;justify-content:space-between;gap:12px;margin-top:17px}.move{display:flex;gap:10px}.touch{width:65px;height:54px;border:2px solid #f6b9d5;background:#fff1f8;border-radius:17px;color:#b74980;font-size:24px;font-weight:900;touch-action:none;user-select:none;cursor:pointer;box-shadow:0 4px 0 #eeb9d2}.touch:active,.touch.pressed{transform:translateY(3px);box-shadow:0 1px 0 #eeb9d2;background:#f9d4e7}.touch.jump{width:92px;font-size:14px;color:#fff;background:#e969a6;border-color:#e969a6;box-shadow:0 4px 0 #bd4f87}@keyframes pop{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}@media(max-width:700px){body{padding:10px}.shell{padding:12px;border-radius:23px}.top{margin-bottom:10px}.pill{font-size:12px;padding:8px 12px}.hint{font-size:10px;top:8px;left:8px}.mobile{display:flex}.instructions{font-size:11px}.bottom{margin-top:12px}.stage{border-width:3px}}
+@media(hover:none),(pointer:coarse){.mobile{display:flex}}
+.story-status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:#87456e;font-weight:800;margin:-4px 2px 12px}.story-status span{color:#bd7b9f}.letterNumber{font-size:11px;letter-spacing:.14em;font-weight:900;color:#b8709c;margin-top:5px}.modal{z-index:10}.modal-inner{width:min(100%,430px);max-width:430px;background:linear-gradient(145deg,#fff9fc,#ffe1ef);border-color:#ffd3ea}.modal-inner p{font-size:15px;line-height:1.7;white-space:pre-line}.modal-inner h2{font-size:25px}@media(max-width:700px){.story-status{font-size:10px}}
+
+/* Cartas largas: ventana ajustada al área de juego y acción siempre accesible */
+.modal{padding:clamp(5px,1.4vw,14px);overflow:hidden;min-height:0}
+.modal-inner{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
+  max-height:calc(100% - 8px);min-height:0;overflow:hidden;
+  padding:clamp(8px,1.8vw,18px) clamp(12px,2.2vw,22px);
+  animation:pop .25s ease-out}
+.modal-inner .big{font-size:clamp(17px,3vw,29px);line-height:1;flex-shrink:0}
+.modal-inner .letterNumber{margin-top:2px;flex-shrink:0}
+.modal-inner h2{font-size:clamp(15px,2.6vw,22px);line-height:1.15;margin:3px 0 5px;flex-shrink:0}
+.modal-inner p{font-size:clamp(12px,1.8vw,14px);line-height:1.45;
+  margin:0 0 8px;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:#db83ac #ffe6f1;
+  padding:0 5px 2px 0;user-select:text}
+.modal-inner .btn{flex-shrink:0;align-self:stretch;position:relative;z-index:1;
+  font-size:clamp(11px,1.9vw,14px);padding:clamp(6px,1.6vw,10px) 12px;
+  border-radius:11px;touch-action:manipulation}
+@media(max-width:700px){.modal{padding:4px}.modal-inner{max-height:calc(100% - 4px);padding:6px 10px;border-width:2px;border-radius:12px}.modal-inner p{font-size:11px;line-height:1.34;margin-bottom:5px}.modal-inner .big{font-size:16px}.modal-inner h2{font-size:14px;margin:2px 0 4px}.modal-inner .letterNumber{font-size:9px}.modal-inner .btn{font-size:11px;padding:6px 9px;box-shadow:0 2px 0 #ad4b7d}}
+
+/* Pantalla de bienvenida y experiencia móvil */
+body{min-height:100dvh}
+.start-overlay{position:absolute;inset:0;z-index:30;background:linear-gradient(160deg,rgba(41,23,77,.91),rgba(139,69,141,.82) 60%,rgba(224,112,167,.76));display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;color:#fff;backdrop-filter:blur(3px)}
+.start-overlay.hidden{display:none}
+.start-card{width:min(100%,435px);max-height:100%;overflow:auto;padding:clamp(15px,3vw,30px);border:2px solid #ffd9ef;border-radius:24px;background:linear-gradient(140deg,#50316aca,#8a4f90ea);box-shadow:0 12px 30px #21132a88}
+.start-deco{font-size:clamp(24px,5vw,44px);line-height:1.25}
+.start-card h2{font-size:clamp(21px,4.5vw,33px);line-height:1.1;color:#ffe4f2;margin:9px 0}
+.start-card p{font-size:clamp(12px,2.4vw,15px);line-height:1.45;color:#fff1fa;margin:8px 0 15px}
+.start-btn{display:block;width:100%;min-height:52px;border:2px solid #ffe6f4;border-radius:16px;background:linear-gradient(120deg,#ffb3da,#f66aa9);color:#612548;font-family:inherit;font-size:clamp(15px,3.3vw,19px);font-weight:900;cursor:pointer;box-shadow:0 5px 0 #a8447f;touch-action:manipulation}
+.start-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #a8447f}
+.stage{isolation:isolate}.mobile{justify-content:space-between}.touch{touch-action:none}
+@media(max-width:700px){
+ body{display:block;padding:0;background:#412955}
+ .shell{width:100%;min-height:100dvh;padding:10px 10px max(14px,env(safe-area-inset-bottom));border:0;border-radius:0;box-shadow:none;background:linear-gradient(155deg,#fff5fb,#ffe6f5)}
+ .top{gap:5px;margin-bottom:8px}.top h1{font-size:clamp(18px,5vw,25px)}.eyebrow{font-size:9px;letter-spacing:.1em}.subtitle{font-size:11px;line-height:1.3;margin:3px 0 0}.pill{padding:6px 11px;font-size:11px}
+ .meter{margin:7px 0;height:7px}.story-status{margin:0 2px 8px;gap:4px;font-size:11px}
+ .stage{border:3px solid #e8a3d1;border-radius:18px}
+ .stage canvas{width:100%;height:auto;aspect-ratio:auto}
+ .hint{font-size:10px;top:8px;left:8px;right:8px;width:max-content;max-width:calc(100% - 16px);padding:5px 8px;background:#fff7fbeb}
+ .mobile{display:flex;align-items:center;margin-top:10px;gap:12px;position:relative}
+ .move{gap:11px}.touch{width:clamp(66px,19vw,85px);height:clamp(69px,19vw,85px);border-radius:20px;font-size:31px;box-shadow:0 5px 0 #e9afd0}
+ .touch.jump{width:clamp(106px,31vw,152px);font-size:17px;box-shadow:0 5px 0 #ba518d}
+ .bottom{margin-top:12px}.bottom .instructions{font-size:11px;max-width:210px;line-height:1.4}.bottom .btn{padding:9px 12px;font-size:11px}
+ .modal{padding:8px}.modal-inner{max-height:calc(100% - 6px);padding:11px 13px}.modal-inner p{font-size:clamp(12px,3vw,14px);line-height:1.4}.modal-inner .btn{min-height:39px;font-size:12px;padding:7px 10px}
+ .modal-inner h2{font-size:clamp(16px,4vw,20px)}.modal-inner .big{font-size:22px}
+}
+@media(max-width:360px){.shell{padding:8px 7px 12px}.top h1{font-size:18px}.touch{width:62px;height:65px}.touch.jump{width:99px}.hint{font-size:9px}.subtitle{font-size:10px}}
+@media(max-width:700px) and (orientation:landscape){.shell{max-width:930px;margin:auto}.stage canvas{max-height:60dvh;object-fit:fill}.mobile{margin-top:5px}.touch{height:52px;width:65px}.touch.jump{width:105px}}
+</style>
+</head>
+<body>
+<main class="shell">
+ <div class="top"><div><div class="eyebrow">✦ Un pequeño juego de amor ✦</div><h1>Un encuentro entre corazones ♡</h1><p class="subtitle">Sigue el camino, descubre las cartas y reúne corazones hasta encontrarla.</p></div><div class="pill" aria-live="polite">💗 <span id="score">0</span> / <span id="total">15</span> corazones</div></div>
+ <div class="meter"><span id="progress"></span></div><div class="story-status" aria-live="polite">✉️ Cartas descubiertas: <b id="lettersFound">0</b> / 3 <span>•</span> <span id="objective">Reúne las 3 cartas para abrir el regalo</span></div>
+ <div class="stage"><div class="start-overlay" id="startOverlay" role="dialog" aria-modal="true" aria-labelledby="startTitle"><div class="start-card"><div class="start-deco">💗 ✉️ 🎁</div><h2 id="startTitle">Un encuentro entre corazones</h2><p>Una aventura hecha con mucho cariño. Descubre tres cartas, reúne corazones y esquiva los corazones rotos hasta llegar a una sorpresa especial.</p><button class="start-btn" id="startGame">💖 Iniciar juego</button></div></div><canvas id="game" width="800" height="400" aria-label="Juego de plataformas romántico: usa las flechas para moverte y espacio para saltar" tabindex="0"></canvas><div class="hint">Busca cartas ✉️, reúne corazones 💗 y evita los rotos 💔</div><div class="modal" id="modal"><div class="modal-inner"><div class="big" id="modalEmoji">💌</div><div class="letterNumber" id="letterNumber"></div><h2 id="modalTitle">Una carta para ti</h2><p id="winText"></p><button class="btn" id="playAgain">♡ Continuar aventura</button></div></div></div>
+ <div class="bottom"><div class="instructions">⌨️ Flechas / A-D para moverte · Espacio / ↑ / W para saltar</div><button class="btn" id="restart">↻ Reiniciar aventura</button></div>
+ <div class="mobile"><div class="move"><button class="touch" id="left" aria-label="Mover a la izquierda">←</button><button class="touch" id="right" aria-label="Mover a la derecha">→</button></div><button class="touch jump" id="jump" aria-label="Saltar">↑ Saltar</button></div>
+</main>
+<script>
+(()=>{
+'use strict';
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');let W=800;const H=400;let started=false;const startOverlay=document.getElementById('startOverlay'),startBtn=document.getElementById('startGame');
+const scoreEl=document.getElementById('score'),totalEl=document.getElementById('total'),progress=document.getElementById('progress'),modal=document.getElementById('modal'),winText=document.getElementById('winText');
+const ground=338, WORLD=4640, END_X=4470;
+const platforms=[{x:0,y:ground,w:WORLD,h:62,ground:true},
+{x:275,y:258,w:132,h:16},{x:810,y:252,w:142,h:16},{x:1160,y:240,w:125,h:16},
+{x:1600,y:256,w:155,h:16},{x:2100,y:243,w:140,h:16},{x:2500,y:260,w:138,h:16},
+{x:3000,y:247,w:150,h:16},{x:3510,y:245,w:142,h:16},{x:3930,y:251,w:145,h:16}];
+const hearts=[
+{x:160,y:301},{x:327,y:220},{x:500,y:302},{x:900,y:214},{x:1065,y:301},
+{x:1224,y:203},{x:1450,y:301},{x:1664,y:217},{x:1825,y:299},{x:2020,y:301},
+{x:2160,y:208},{x:2350,y:300},{x:2556,y:225},{x:2720,y:301},{x:2960,y:301},
+{x:3070,y:212},{x:3430,y:302},{x:3570,y:208},{x:3780,y:300},{x:3990,y:215},
+{x:4200,y:301},{x:4350,y:301}];
+const letters=[
+{x:660,y:294,title:'Una casualidad perfecta',message:'Entre tantas personas, tantos caminos y tantos mundos posibles, la probabilidad de encontrarte parecía casi imposible. Y, sin embargo, coincidimos. De todas las casualidades que pudieron ocurrir en mi vida, tú eres, sin duda, la más perfecta y bonita de todas.'},
+{x:1920,y:294,title:'Una sonrisa que quiero ver de cerca',message:'Me encanta tu forma de ser, cómo logras hacerme reír incluso estando lejos y lo hermosa que eres. Y entre tantas sonrisas que me regalas a la distancia, hay una que muero por ver de cerca, justo antes de robarte un beso.'},
+{x:3260,y:294,title:'Lo especial que eres para mí',message:'Gracias por ser tan linda conmigo, tan paciente, tan amable y tan cariñosa. Me haces querer estar cerquita de ti, abrazarte y recordarte todos los días lo especial que eres para mí. ❤️'}];
+// Los corazones rotos son enemigos móviles: patrullan un tramo horizontal del suelo.
+// Su velocidad cambia por zona; los tramos permiten verlos venir y saltarlos.
+const hazards=[
+ {center:1030,range:85,speed:1.05,phase:0,size:22},
+ {center:1465,range:75,speed:1.15,phase:2.2,size:24},
+ {center:2305,range:90,speed:1.2,phase:1.1,size:23},
+ {center:2800,range:80,speed:1.45,phase:4.0,size:24},
+ {center:3660,range:78,speed:1.4,phase:1.5,size:23},
+ {center:4130,range:88,speed:1.55,phase:3.1,size:24}
+];
+const player={x:45,y:ground-58,w:42,h:58,vx:0,vy:0,grounded:false,face:1,run:0};
+const friend={x:END_X,y:ground-58,w:42,h:58};
+let won=false,time=0,score=0,particles=[],camera=0,dialog=null,celebrating=false,dead=false,respawnX=45,invulnerableFrames=0;
+const keys={left:false,right:false,jump:false};
+const letterCountEl=document.getElementById('lettersFound'),objectiveEl=document.getElementById('objective'),modalTitle=document.getElementById('modalTitle'),modalEmoji=document.getElementById('modalEmoji'),letterNumberEl=document.getElementById('letterNumber'),modalBtn=document.getElementById('playAgain');
+totalEl.textContent=hearts.length;
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+function ellipse(x,y,rx,ry,color,rot=0){ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(x,y,rx,ry,rot,0,Math.PI*2);ctx.fill()}
+function rr(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
+function heart(x,y,s,color){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.beginPath();ctx.moveTo(0,6);ctx.bezierCurveTo(-17,-5,-13,-14,-5,-13);ctx.bezierCurveTo(0,-12,0,-7,0,-7);ctx.bezierCurveTo(0,-7,5,-14,11,-13);ctx.bezierCurveTo(22,-9,16,3,0,15);ctx.fillStyle=color;ctx.fill();ctx.restore()}
+function sparkle(x,y,r,c){ctx.strokeStyle=c;ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x-r,y);ctx.lineTo(x+r,y);ctx.moveTo(x,y-r);ctx.lineTo(x,y+r);ctx.stroke()}
+function cloud(x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ellipse(-24,3,37,17,'#fffafc');ellipse(2,-6,32,24,'#fffafc');ellipse(30,5,30,16,'#fffafc');ctx.restore()}
+function pxRect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
+function pxCirc(x,y,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.arc(Math.round(x),Math.round(y),r,0,Math.PI*2);ctx.fill()}
+function pxPoly(points,color){ctx.fillStyle=color;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.fill()}
+function pxSparkle(x,y,k=1,col='#ffd7e9'){pxRect(x-1*k,y-4*k,2*k,8*k,col);pxRect(x-4*k,y-1*k,8*k,2*k,col)}
+function pxCloud(x,y,s=1){ctx.save();ctx.translate(x,y);ctx.scale(s,s);pxRect(-25,3,53,8,'#e7a0d4');pxRect(-19,-3,40,11,'#ffc2db');pxRect(-11,-10,18,10,'#ffd0df');pxRect(4,-5,12,11,'#ffd0df');pxRect(-24,6,8,3,'#ffb4d2');ctx.restore()}
+function pxMountain(base,peak,height,color){pxPoly([[peak-90,base],[peak,base-height],[peak+105,base]],color);pxPoly([[peak-24,base-height+24],[peak,base-height],[peak+22,base-height+26],[peak+9,base-height+19],[peak+3,base-height+28],[peak-8,base-height+17]],'#a07bda')}
+function pxTree(x,y,scale=1){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);pxRect(-8,-57,15,60,'#60365f');pxRect(-5,-51,7,44,'#b85f76');pxPoly([[-6,-25],[-23,-53],[-18,-57],[-2,-39]],'#744365');pxPoly([[4,-33],[24,-58],[26,-54],[6,-27]],'#744365');for(const [a,b,r] of [[-22,-75,20],[0,-86,25],[20,-71,24],[-36,-60,18],[34,-56,17],[-4,-59,27]]){pxCirc(a+2,b+3,r+2,'#302344');pxCirc(a,b,r,'#438a7d');pxCirc(a-3,b-4,r-4,'#75bd63');pxRect(a-7,b-10,8,6,'#9bd76c')}ctx.restore()}
+function bg(){
+ const BW=418,BH=235;
+ ctx.save();
+ const sx=W/BW, sy=H/BH;
+ ctx.scale(sx,sy);
+ const gr=ctx.createLinearGradient(0,0,0,185);
+ gr.addColorStop(0,'#8c5cf1');gr.addColorStop(.37,'#ca76d7');gr.addColorStop(.75,'#f294bd');gr.addColorStop(1,'#e6a3b9');
+ ctx.fillStyle=gr;ctx.fillRect(0,0,BW,BH);
+ for(let i=0;i<14;i++){const x=(i*73+27)%BW,y=9+(i*37)%94;pxSparkle(x,y,.5+(i%2)*.35,'#ffcce2')}
+ pxCirc(302,77,26,'#ffdea0');pxRect(276,77,52,13,'#ffdb9b');
+ pxCloud(90,41,.96);pxCloud(159,69,.84);pxCloud(243,50,.7);pxCloud(352,30,.75);
+ pxMountain(159,82,79,'#9e72d9');pxMountain(164,231,78,'#8256c3');pxMountain(163,328,85,'#ab77d8');pxMountain(177,140,69,'#9969d4');pxMountain(178,386,67,'#8e61c6');
+ for(let i=0;i<22;i++){const x=i*22-8,h=9+(i*13)%30;pxRect(x,151-h,13,h,'#79569d');pxRect(x+3,151-h-5,5,5,'#79569d');pxRect(x+3,151-h+9,2,3,'#aa69b0')}
+ pxRect(0,151,BW,29,'#577f9a');
+ for(let i=0;i<21;i++){pxCirc(i*23,163+(i%3)*3,12,'#568b80');pxCirc(i*23+11,170,10,'#578b80')}
+ pxTree(17,175,.95);pxTree(404,165,.78);
+ ctx.restore();
+ // glow overlay and extra sparkles so the vector characters still integrate nicely
+ const haze=ctx.createLinearGradient(0,H*.2,0,H);
+ haze.addColorStop(0,'rgba(255,255,255,0)');
+ haze.addColorStop(.65,'rgba(243,170,208,.14)');
+ haze.addColorStop(1,'rgba(255,215,236,.23)');
+ ctx.fillStyle=haze;ctx.fillRect(0,0,W,H);
+ for(let i=0;i<10;i++){const x=(i*97+45)%W,y=40+(i*37)%145;const a=.45+.35*Math.sin(time*.05+i);sparkle(x,y,2+a*1.5,'rgba(255,232,246,.7)')}
+}
+function platformDraw(){
+ for(const p of platforms){if(p.x+p.w<camera-25||p.x>camera+W+25)continue;
+ ctx.save();ctx.shadowColor='#713a7a65';ctx.shadowBlur=9;ctx.shadowOffsetY=5;
+ rr(p.x,p.y,p.w,p.h,p.ground?0:9,'#a56395');ctx.restore();
+ rr(p.x,p.y,p.w,p.ground?11:8,p.ground?0:7,'#ffbadd');
+ if(p.ground){const a=Math.max(0,Math.floor((camera-30)/38)),b=Math.ceil((camera+W+30)/38);for(let i=a;i<b;i++){heart(i*38+14,367+(i%2)*10,.19,'#f3b2ce')}}
+ else {rr(p.x+5,p.y+3,p.w-10,3,2,'#ffebf6');for(let x=p.x+14;x<p.x+p.w-8;x+=26){ellipse(x,p.y+12,3,2,'#bb669d')}}
+ }
+}
+function drawGirl(x,y,curly,face=1,run=0,bob=0,celebrate=false,holdingGift=false){ctx.save();ctx.translate(x+21,y+8+bob);ctx.scale(face,1);
+ const hair=curly?'#16131c':'#d92629',hairShade=curly?'#302a35':'#ff5349',dress=curly?'#f0f3ff':'#f187a8',skin=curly?'#e7b08d':'#f4c5a6';
+ // hair back and swinging side locks
+ if(curly){
+   ellipse(0,15,20,28,hairShade);
+   ellipse(-14,28,10,24,hair,Math.sin(run)*.08);
+   ellipse(14,28,10,24,hairShade,-Math.sin(run)*.08);
+   for(let i=0;i<7;i++){ellipse(-18+i*6,-1+(i%2)*2,7.2,7.2,i%2?hairShade:hair)}
+   for(let i=0;i<5;i++){ellipse(-16,14+i*10,6.6,7.8,i%2?hair:hairShade);ellipse(16,14+i*10,6.6,7.8,i%2?hairShade:hair)}
+   ellipse(-12,50,8,8,hair);ellipse(12,50,8,8,hairShade);
+ }else{ellipse(1,15,20,26,hair);ellipse(-16,23,9,20,hairShade,Math.sin(run)*.12);ellipse(17,23,9,20,hair)}
+ // animated legs, shoes
+ const step=Math.sin(run)*3;ctx.strokeStyle='#ba6a8d';ctx.lineWidth=6;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-7,42);ctx.lineTo(-8-step,52);ctx.moveTo(7,42);ctx.lineTo(8+step,52);ctx.stroke();ellipse(-9-step,53,7,3,'#894f83');ellipse(9+step,53,7,3,'#894f83');
+ // body and cute rounded skirt
+ rr(-12,28,24,18,8,dress);ellipse(0,44,19,10,dress);ellipse(0,40,14,3,curly?'#dbe6ff':'#ffcfe0');
+ // arms wave/celebration
+ ctx.strokeStyle=skin;ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(-12,33);ctx.lineTo(-18,celebrate?17:38+Math.sin(run)*3);ctx.moveTo(12,33);ctx.lineTo(19,celebrate?14:38-Math.sin(run)*3);ctx.stroke();
+ // face and ears
+ ellipse(-16,13,5,6,skin);ellipse(16,13,5,6,skin);ellipse(0,13,16,18,skin);
+ // hair around face and fringe
+ if(curly){ellipse(-9,-3,10,8,hair);ellipse(4,-4,11,8,hairShade);ellipse(15,0,6,8,hair);ellipse(-16,6,6,10,hairShade)}else{ellipse(-7,-3,12,8,hair);ellipse(7,-6,11,7,hairShade);ellipse(-14,3,6,10,hair)}
+ // big eyes / little lashes
+ ellipse(-6,14,3.8,5,'#4a3045');ellipse(7,14,3.8,5,'#4a3045');ellipse(-7,12,1.45,1.9,'white');ellipse(6,12,1.45,1.9,'white');
+ // Lentes finos de marco oscuro para la pelirroja, sobre los ojos.
+ if(!curly){ctx.save();ctx.strokeStyle='#39253b';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(-12,8,12,12,3);ctx.roundRect(2,8,12,12,3);ctx.moveTo(0,13);ctx.lineTo(2,13);ctx.moveTo(-12,12);ctx.lineTo(-16,10);ctx.moveTo(14,12);ctx.lineTo(17,10);ctx.stroke();ctx.strokeStyle='rgba(255,255,255,.75)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-9,10);ctx.lineTo(-7,9);ctx.moveTo(5,10);ctx.lineTo(7,9);ctx.stroke();ctx.restore()}
+ ctx.strokeStyle='#6c4056';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(-11,9);ctx.lineTo(-8,11);ctx.moveTo(12,9);ctx.lineTo(9,11);ctx.stroke();
+ ellipse(-12,21,5,2.5,'#f18eaa');ellipse(13,21,5,2.5,'#f18eaa');ctx.beginPath();ctx.strokeStyle='#ad547c';ctx.lineWidth=1.8;ctx.arc(0,21,3.7,.1,Math.PI-.1);ctx.stroke();
+ // accessories
+ if(curly){heart(17,0,.34,'#ffd5e8');ellipse(17,-5,2,2,'#fff')}else{rr(10,-7,11,6,3,'#ff9dc8');ellipse(15,-4,2,2,'#fff3f8')}
+ // gift box in hands for the redhead at the ending
+ if(holdingGift){
+  ctx.save();
+  rr(-9,31,18,14,3,'#ff8db8','#a63f75');
+  ctx.fillStyle='#ffd9eb';ctx.fillRect(-1,31,2,14);ctx.fillRect(-9,37,18,2);
+  ctx.beginPath();ctx.fillStyle='#ffd9eb';
+  ctx.arc(-3,30,3,0,Math.PI*2);ctx.arc(3,30,3,0,Math.PI*2);ctx.fill();
+  heart(0,28,.18,'#fff4fa');
+  ctx.restore();
+ }
+ ctx.restore()}
+
+function drawBrokenHeart(x,y,size=24){
+ const bob=Math.sin(time*.07+x)*2;
+ ctx.save();ctx.translate(x,y+bob);ctx.shadowColor='#6b2254';ctx.shadowBlur=13;
+ ctx.fillStyle='#39213e';ctx.beginPath();ctx.moveTo(0,-9);ctx.bezierCurveTo(-16,-26,-29,-4,-14,12);ctx.lineTo(-2,22);ctx.lineTo(-5,7);ctx.lineTo(2,0);ctx.lineTo(-3,-5);ctx.closePath();ctx.fill();
+ ctx.beginPath();ctx.moveTo(5,-10);ctx.bezierCurveTo(18,-25,31,-7,15,12);ctx.lineTo(4,22);ctx.lineTo(7,7);ctx.lineTo(0,3);ctx.lineTo(7,-4);ctx.closePath();ctx.fill();
+ ctx.shadowBlur=0;ctx.fillStyle='#ef476f';ctx.beginPath();ctx.moveTo(-2,-7);ctx.bezierCurveTo(-12,-19,-25,-2,-12,11);ctx.lineTo(-4,16);ctx.lineTo(-6,6);ctx.lineTo(0,0);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#f16b8f';ctx.beginPath();ctx.moveTo(7,-8);ctx.bezierCurveTo(17,-18,27,-3,13,11);ctx.lineTo(6,16);ctx.lineTo(8,7);ctx.lineTo(2,2);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#ffe1ec';ctx.fillRect(-13,-9,4,3);
+ ctx.restore();
+}
+function hazardX(h){return h.center+Math.sin(time*h.speed*.018+h.phase)*h.range}
+function showDeath(){
+ respawnX=Math.max(45,player.x-260);
+ dead=true;dialog='death';keys.left=keys.right=keys.jump=false;
+ modalEmoji.textContent='💔';letterNumberEl.textContent='CORAZÓN ROTO';modalTitle.textContent='¡Oh, no!';
+ winText.textContent='Un corazón roto te alcanzó. Volverás a aparecer un poco más atrás, sin perder las cartas ni los corazones que ya juntaste. ¡Salta para esquivarlo!';
+ modalBtn.textContent='♡ Continuar desde aquí';modal.classList.add('show');modalBtn.focus({preventScroll:true});
+}
+function drawLetter(x,y,num){
+ const bob=Math.sin(time*.065+num)*4;
+ ctx.save();ctx.translate(x,y+bob);ctx.shadowColor='#ff82bd';ctx.shadowBlur=16;
+ rr(-19,-15,38,29,5,'#fff9ef','#eaa4bd');ctx.shadowBlur=0;
+ ctx.fillStyle='#f8c8dc';ctx.beginPath();ctx.moveTo(-17,-12);ctx.lineTo(0,2);ctx.lineTo(17,-12);ctx.strokeStyle='#dd91ad';ctx.lineWidth=2;ctx.stroke();
+ heart(0,5,.35,'#f05c9d');sparkle(24,-20,4,'#fff');
+ ctx.restore();
+}
+function spawn(x,y,n=8){for(let i=0;i<n;i++)particles.push({x,y,vx:(Math.random()-.5)*5,vy:-Math.random()*5-1,life:40+Math.random()*25,size:2+Math.random()*3})}
+function updateHud(){scoreEl.textContent=score;letterCountEl.textContent=letters.filter(l=>l.opened).length;
+ const missing=letters.filter(l=>!l.opened).length;
+ objectiveEl.textContent=missing?`Faltan ${missing} carta${missing===1?'':'s'} para abrir el regalo`:'¡Regalo desbloqueado! Ve al encuentro 💗';
+ progress.style.width=Math.max(0,Math.min(100,Math.round(player.x/END_X*100)))+'%';
+}
+function showLetter(i){const letter=letters[i];letter.opened=true;dialog='letter';keys.left=keys.right=keys.jump=false;
+ modalEmoji.textContent='💌';letterNumberEl.textContent=`CARTA ${i+1} DE ${letters.length}`;
+ modalTitle.textContent=letter.title;winText.textContent=letter.message;
+ modalBtn.textContent='♡ Seguir avanzando';modal.classList.add('show');spawn(letter.x,letter.y,26);updateHud();modalBtn.focus({preventScroll:true});
+}
+function showLockedGift(){
+ dialog='locked';keys.left=keys.right=keys.jump=false;
+ const missing=letters.filter(l=>!l.opened).length;
+ modalEmoji.textContent='🔒🎁';letterNumberEl.textContent=`CARTAS: ${letters.length-missing} DE ${letters.length}`;
+ modalTitle.textContent='¡Uy! Regalo bloqueado';
+ winText.textContent='Uy, tienes que tomar todas las cartas para desbloquear este regalo. 💌 Regresa por las que te faltan y vuelve conmigo.';
+ modalBtn.textContent='♡ Regresar por las cartas';
+ modal.classList.add('show');modalBtn.focus({preventScroll:true});
+}
+function showEnding(){won=true;dialog='end';keys.left=keys.right=keys.jump=false;
+ modalEmoji.textContent='🎁';letterNumberEl.textContent='FIN DEL JUEGO';modalTitle.textContent='Fin del juego';
+ winText.textContent='En este día tan especial quiero desearte un muy feliz cumpleaños. Deseo de todo corazón que cada una de tus metas, sueños y anhelos se hagan realidad, porque mereces que la vida te regale cosas tan bonitas como tú. Hoy quiero regalarte algo que no se puede envolver: mi corazón, con todo el cariño y amor que tengo para ti. Te amo muchísimo y espero poder hacerte tan feliz como tú me haces a mí. ❤️';
+ modalBtn.textContent='♡ Volver a jugar';spawn(friend.x+18,friend.y+18,70);
+ modal.classList.add('show');modalBtn.focus({preventScroll:true});
+}
+function update(){if(!started)return;time++;if(invulnerableFrames>0&&!dialog)invulnerableFrames--;
+ if(!won&&!dialog){
+ const moving=Number(keys.right)-Number(keys.left);
+ player.vx+=(moving*4.5-player.vx)*.23;if(Math.abs(player.vx)<.07)player.vx=0;if(moving)player.face=moving;
+ if(keys.jump&&player.grounded){player.vy=-11.8;player.grounded=false;spawn(player.x+21,player.y+55,7);keys.jump=false}
+ player.vy=Math.min(player.vy+.55,12);const lastBottom=player.y+player.h;
+ player.x=clamp(player.x+player.vx,0,WORLD-player.w);player.y+=player.vy;player.grounded=false;
+ for(const p of platforms){if(player.vy>=0&&lastBottom<=p.y+8&&player.y+player.h>=p.y&&player.x+player.w>p.x+4&&player.x<p.x+p.w-4){player.y=p.y-player.h;player.vy=0;player.grounded=true}}
+ if(player.y>H+40){player.y=ground-58;player.vy=0}
+ player.run+=Math.abs(player.vx)*.17;
+ for(const h of hearts){if(!h.taken&&Math.hypot(player.x+21-h.x,player.y+24-h.y)<36){h.taken=true;score++;spawn(h.x,h.y,13)}}
+ // Tocar un corazón roto termina la partida; saltar por encima permite esquivarlo.
+ for(const h of hazards){
+  const hx=hazardX(h);
+  if(invulnerableFrames===0 && Math.abs(player.x+21-hx)<27 && player.y+player.h>ground-37 && player.y+12<ground-3){
+    spawn(player.x+21,player.y+24,25);showDeath();break;
+  }
+ }
+ if(dead){updateHud();return}
+ // Cada carta es independiente: se puede pasar de largo, volver y recogerla después.
+ for(let i=0;i<letters.length;i++){
+   const l=letters[i];
+   if(!l.opened && Math.abs(player.x+21-l.x)<36 && player.y+player.h>l.y-15){showLetter(i);break}
+ }
+ // El encuentro es accesible desde el inicio; solo el regalo exige las tres cartas.
+ if(!dialog && player.x+player.w>friend.x-6 && player.y+player.h>friend.y+7){
+   if(letters.every(l=>l.opened))showEnding();else showLockedGift();
+ }
+ updateHud();
+ }
+ const desired=clamp(player.x-235,0,WORLD-W);camera+=(desired-camera)*.1;
+ particles=particles.filter(p=>p.life>0);for(const p of particles){p.x+=p.vx;p.y+=p.vy;p.vy+=.07;p.life--}
+}
+function render(){ctx.clearRect(0,0,W,H);bg();
+ // Camera follows only the black-haired protagonist. Destination is off-screen at the beginning.
+ ctx.save();ctx.translate(-camera,0);
+ platformDraw();
+ for(const h of hearts){if(h.taken||h.x<camera-30||h.x>camera+W+30)continue;
+ const y=h.y+Math.sin(time*.07+h.x)*4;ctx.save();ctx.shadowColor='#f264a5';ctx.shadowBlur=15;heart(h.x,y,.83,'#f35e9f');ctx.restore();sparkle(h.x+15,y-13,2.2,'#fff')}
+ for(const h of hazards){const hx=hazardX(h);if(hx>camera-45&&hx<camera+W+45)drawBrokenHeart(hx,ground-24,h.size)}
+ for(let i=0;i<letters.length;i++){const l=letters[i];if(!l.opened&&l.x>camera-40&&l.x<camera+W+40)drawLetter(l.x,l.y,i)}
+ // La pelirroja siempre espera al final; el regalo se desbloquea con las tres cartas.
+ if(friend.x>camera-50&&friend.x<camera+W+50){
+ for(let i=0;i<4;i++)heart(friend.x+22+Math.sin(time*.017+i)*24,230-i*18+Math.cos(time*.02+i)*6,.23+i*.05,'#f085b4');
+ drawGirl(friend.x,friend.y,false,-1,Math.sin(time*.05),Math.sin(time*.07)*1.5,won,true);
+ }
+ if(invulnerableFrames===0||Math.floor(time/7)%2===0)drawGirl(player.x,player.y,true,player.face,player.run,player.grounded?Math.abs(Math.sin(player.run))*-1.3:0,won);
+ for(const p of particles){ctx.globalAlpha=Math.min(1,p.life/25);heart(p.x,p.y,p.size/7,'#ec5e9a')}ctx.globalAlpha=1;
+ if(won)heart((player.x+friend.x)/2+20,175+Math.sin(time*.08)*5,1.5,'#ec4b95');
+ ctx.restore();
+}
+function loop(){update();render();requestAnimationFrame(loop)}
+function reset(){player.x=45;player.y=ground-58;player.vx=player.vy=0;player.face=1;player.grounded=false;player.run=0;
+ hearts.forEach(h=>h.taken=false);letters.forEach(l=>l.opened=false);score=0;particles=[];won=false;dead=false;dialog=null;camera=0;time=0;respawnX=45;invulnerableFrames=0;
+ keys.left=keys.right=keys.jump=false;modal.classList.remove('show');updateHud();canvas.focus({preventScroll:true});}
+function closeModal(){
+ if(dialog==='end'){reset();return}
+ if(dialog==='locked') {
+  // Alejarse del regalo al cerrar el aviso permite regresar a buscar cualquier carta.
+  player.x=Math.min(player.x,friend.x-120);player.vx=0;player.vy=0;player.y=ground-player.h;player.grounded=true;
+  camera=clamp(player.x-W*.35,0,WORLD-W);
+ }
+ if(dialog==='death'){
+  player.x=respawnX;player.y=ground-player.h;player.vx=0;player.vy=0;
+  player.grounded=true;player.face=1;dead=false;
+  // Protection briefly after reappearing, so a moving hazard cannot hit immediately.
+  invulnerableFrames=105;
+  camera=clamp(player.x-235,0,WORLD-W);
+ }
+ dialog=null;keys.left=keys.right=keys.jump=false;
+ modal.classList.remove('show');updateHud();canvas.focus({preventScroll:true});
+}
+function adjustViewport(){const w=window.innerWidth;const newWidth=w<=600?460:w<=850?650:800;if(W!==newWidth){W=newWidth;canvas.width=W;canvas.height=H;camera=clamp(player.x-W*.35,0,WORLD-W)}}
+window.addEventListener('resize',adjustViewport);
+startBtn.addEventListener('click',()=>{started=true;startOverlay.classList.add('hidden');canvas.focus({preventScroll:true})});
+const map={ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',ArrowUp:'jump',w:'jump',W:'jump',' ':'jump'};
+window.addEventListener('keydown',e=>{if(!map[e.key])return;if(e.target?.tagName==='BUTTON'&&e.key===' ')return;e.preventDefault();if(started&&!dialog)keys[map[e.key]]=true});
+window.addEventListener('keyup',e=>{if(map[e.key]){e.preventDefault();if(map[e.key]!=='jump')keys[map[e.key]]=false}});
+window.addEventListener('blur',()=>{keys.left=keys.right=keys.jump=false});
+function bindTouch(id,k){const btn=document.getElementById(id);const off=e=>{e.preventDefault();if(k!=='jump')keys[k]=false;btn.classList.remove('pressed')};
+ btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);if(started&&!dialog)keys[k]=true;btn.classList.add('pressed')});
+ btn.addEventListener('pointerup',off);btn.addEventListener('pointercancel',off);btn.addEventListener('lostpointercapture',off)}
+bindTouch('left','left');bindTouch('right','right');bindTouch('jump','jump');
+document.getElementById('restart').addEventListener('click',reset);modalBtn.addEventListener('click',closeModal);
+adjustViewport();reset();loop();
+})();
+</script>
+</body></html>
